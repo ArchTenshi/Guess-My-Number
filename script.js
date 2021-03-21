@@ -7,7 +7,6 @@ let number = Math.ceil(Math.random() * 20),
   score = 20,
   highscore = 0,
   text = '';
-console.log(number);
 document.querySelector('.check').addEventListener('click', function () {
   let inputNumber = document.querySelector('.guess').value;
   if (!inputNumber) {
