@@ -1,8 +1,4 @@
 'use strict';
-
-// document.querySelector('.message').textContent = 'Correct number';
-// document.querySelector('.number').textContent = 5;
-// document.querySelector('.guess').value = 5;
 let number = Math.ceil(Math.random() * 20),
   score = 20,
   highscore = 0,
