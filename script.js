@@ -1,39 +1,52 @@
 'use strict';
 
-let number = Math.ceil(Math.random() * 20),
-  score = 20,
-  highscore = 0,
-  text = '';
+let number = randomNumber(20),
+  highscore = Number(document.querySelector('.highscore').textContent),
+  text = '',
+  score = 20;
+function changeMessage(place, text) {
+  document.querySelector(place).textContent = text;
+}
+function changeWidth(place, size) {
+  document.querySelector(place).style.width = size;
+}
+function changeBackgroundColor(color) {
+  document.body.style.background = color;
+}
+function randomNumber(max) {
+  return Math.ceil(Math.random() * max);
+}
 document.querySelector('.check').addEventListener('click', function () {
   let inputNumber = document.querySelector('.guess').value;
   if (!inputNumber) {
-    text = 'Input Number!';
+    changeMessage('.message', 'Input Number!');
   } else if (inputNumber == number) {
-    document.querySelector('.message').textContent =
-      '🎉That is correct number!';
-    document.querySelector('.highscore').textContent =
-      highscore < score ? score : highscore;
-    document.querySelector('.number').textContent = inputNumber;
-    document.body.style.background = '#00b200';
-    document.querySelector('.number').style.width = '30rem';
+    changeMessage('.message', '🎉That is correct number!');
+    changeMessage('.highscore', highscore < score ? score : highscore);
+    changeMessage('.number', inputNumber);
+    changeBackgroundColor('#00b200');
+    changeWidth('.number', '30rem');
   } else if (score > 1) {
     if (inputNumber !== number) {
       score--;
-      document.querySelector('.message').textContent =
-        inputNumber < number ? (text = 'Too low') : (text = 'Too high');
+      changeMessage('.score', score);
+      changeMessage(
+        '.message',
+        inputNumber < number ? (text = 'Too low') : (text = 'Too high')
+      );
     }
   } else {
-    document.querySelector('.message').textContent = 'You lost!';
+    changeMessage('.message', 'You lost!');
     score = 0;
   }
-  document.querySelector('.score').textContent = score;
 });
 document.querySelector('.again').addEventListener('click', function () {
-  number = Math.floor(Math.random() * 19 + 1) + 1;
-  document.querySelector('.message').textContent = 'Start guessing...';
-  document.querySelector('.score').textContent = '20';
+  number = randomNumber(20);
+  changeMessage('.message', 'Start guessing...');
+  score = 20;
+  changeMessage('.score', score);
   document.querySelector('.guess').value = '';
-  document.querySelector('.number').textContent = '?';
-  document.body.style.background = '#222';
-  document.querySelector('.number').style.width = '15rem';
+  changeMessage('.number', '?');
+  changeBackgroundColor('#222');
+  changeWidth('.number', '15rem');
 });
