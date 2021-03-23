@@ -16,6 +16,17 @@ function changeBackgroundColor(color) {
 function randomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
+function playAgain() {
+    number = randomNumber(20);
+    changeMessage('.message', 'Start guessing...');
+    score = 20;
+    changeMessage('.score', score);
+    document.querySelector('.guess').value = '';
+    changeMessage('.number', '?');
+    changeBackgroundColor('#222');
+    changeWidth('.number', '15rem');
+}
+
 document.querySelector('.check').addEventListener('click', function () {
   let inputNumber = document.querySelector('.guess').value;
   if (!inputNumber) {
@@ -40,13 +51,4 @@ document.querySelector('.check').addEventListener('click', function () {
     score = 0;
   }
 });
-document.querySelector('.again').addEventListener('click', function () {
-  number = randomNumber(20);
-  changeMessage('.message', 'Start guessing...');
-  score = 20;
-  changeMessage('.score', score);
-  document.querySelector('.guess').value = '';
-  changeMessage('.number', '?');
-  changeBackgroundColor('#222');
-  changeWidth('.number', '15rem');
-});
+document.querySelector('.again').addEventListener('click', playAgain);
